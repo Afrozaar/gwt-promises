@@ -5,7 +5,6 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>io.github.jimmyfm</groupId>
     <artifactId>gwt-promises</artifactId>
-    <version>2</version>
     <packaging>gwt-lib</packaging>
 
 
@@ -107,4 +106,5 @@
         </plugins>
     </build>
 
+    <version>3-SNAPSHOT</version>
 </project>
