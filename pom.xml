@@ -1,63 +1,90 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>io.github.jimmyfm</groupId>
-	<artifactId>gwt-promises</artifactId>
-	<version>1</version>
-	<packaging>war</packaging>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>io.github.jimmyfm</groupId>
+    <artifactId>gwt-promises</artifactId>
+    <version>1-SNAPSHOT</version>
+    <packaging>gwt-lib</packaging>
 
-	<properties>
-		<maven.compiler.source>1.8</maven.compiler.source>
-		<maven.compiler.target>1.8</maven.compiler.target>
-	</properties>
+    <properties>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+    </properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>org.webjars.bower</groupId>
-			<artifactId>promise-polyfill</artifactId>
-			<version>2.1.0</version>
-		</dependency>
+    <dependencies>
+        <dependency>
+            <groupId>org.webjars.bower</groupId>
+            <artifactId>promise-polyfill</artifactId>
+            <version>2.1.0</version>
+        </dependency>
 
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-user</artifactId>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.google.gwt</groupId>
-			<artifactId>gwt-dev</artifactId>
-			<scope>provided</scope>
-		</dependency>
-	</dependencies>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-user</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.google.gwt</groupId>
+            <artifactId>gwt-dev</artifactId>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
 
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>com.google.gwt</groupId>
-				<artifactId>gwt</artifactId>
-				<version>2.8.0</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.google.gwt</groupId>
+                <artifactId>gwt</artifactId>
+                <version>2.8.2</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
 
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>gwt-maven-plugin</artifactId>
-				<version>2.8.0</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>compile</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
+    <build>
+        <plugins>
+
+            <plugin>
+                <groupId>net.ltgt.gwt.maven</groupId>
+                <artifactId>gwt-maven-plugin</artifactId>
+                <version>1.0-rc-9</version>
+                <extensions>true</extensions>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <skipModule>true</skipModule>
+                    <moduleName>io.github.jimmyfm.gwt.javascript.promises.Javascript</moduleName>
+                    <moduleShortName>Promises</moduleShortName>
+                    <failOnError>true</failOnError>
+                    <!-- GWT compiler 2.8 requires 1.8, hence define sourceLevel here if you use a different source language 
+                        for java compilation -->
+                    <sourceLevel>1.8</sourceLevel>
+                    <!-- Compiler configuration -->
+                    <compilerArgs>
+                        <!-- Ask GWT to create the Story of Your Compile (SOYC) (gwt:compile) -->
+                        <arg>-compileReport</arg>
+                        <arg>-XcompilerMetrics</arg>
+                        <compilerArg>-generateJsInteropExports</compilerArg>
+                        <arg>-generateJsInteropExports</arg>
+                    </compilerArgs>
+                    <generateJsInteropExports>true</generateJsInteropExports>
+                    <!-- DevMode configuration -->
+                    <warDir>${project.build.directory}/${project.build.finalName}</warDir>
+                    <classpathScope>compile+runtime</classpathScope>
+                </configuration>
+            </plugin>
+
+
+        </plugins>
+    </build>
 
 </project>
