@@ -8,9 +8,29 @@
     <version>1-SNAPSHOT</version>
     <packaging>gwt-lib</packaging>
 
+
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <name>artifactory.afrozaar.com-releases</name>
+            <url>${deploy-ext-release}</url>
+        </repository>
+        <snapshotRepository>
+            <id>remote-plugins-snapshot</id>
+            <name>artifactory.afrozaar.com-snapshots</name>
+            <url>${deploy-ext-snapshot}</url>
+        </snapshotRepository>
+    </distributionManagement>
+
     <properties>
         <maven.compiler.source>1.8</maven.compiler.source>
         <maven.compiler.target>1.8</maven.compiler.target>
+
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <deploy-ext-release>${repository.home}/ext-release-local</deploy-ext-release>
+        <deploy-ext-snapshot>${repository.home}/ext-snapshot-local</deploy-ext-snapshot>
+
     </properties>
 
     <dependencies>
